@@ -1,0 +1,24 @@
+<form>
+  <div class="mb-3">
+    <label for="categoryId" class="form-label">Category</label>
+    <input type="text" class="form-control" name="categoryId"
+           [(ngModel)]="categoryId" *ngIf="subCategory.id != 0" disabled/>
+    <select class="form-control" 
+            name="categoryId" 
+            id="categoryId"
+            [(ngModel)]="categoryId" 
+            *ngIf="subCategory.id == 0">
+      <option *ngFor="let category of categoriesList$ | async" [value]="category.id">{{category.name}}</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="subCategoryName" class="form-label">Name</label>
+    <input type="text" class="form-control" name="subCategoryName" [(ngModel)]="subCategoryName" />
+  </div>
+  <button class="btn btn-primary" (click)="addSubCategory()" *ngIf="subCategory.id == 0">
+    Add
+  </button>
+  <button class="btn btn-primary" (click)="updateSubCategory()" *ngIf="subCategory.id != 0">
+    Update
+  </button>
+</form>

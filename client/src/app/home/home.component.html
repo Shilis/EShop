@@ -1,0 +1,20 @@
+<div class="container mt-5">
+    <div style="text-align: center;" *ngIf="!registerMode">
+        <h1>Find your favorite products</h1>
+        <p class="lead">Come on in to view best products... all you need to de is sign up!</p>
+        <div class="text-center">
+            <button (click)="registerToggle()" class="btn btn-primary btn-lg mx-2">Register</button>
+            <button class="btn btn-info btn-lg mx-2">Learn more</button>
+        </div>
+    </div>
+
+    <div class="container" *ngIf="registerMode">
+        <div class="row d-flex justify-content-center">
+            <div class="col-4">
+                <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="btn btn-primary" (click)="onLoadProducts()">Load Products</button>

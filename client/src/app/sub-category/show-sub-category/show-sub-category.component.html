@@ -1,0 +1,45 @@
+
+<button class="btn btn-primary float-end m-2" (click)="onCreate(content)">
+  Create Sub Category
+</button>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Category Id</th>
+      <th>Category</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+    <tr *ngFor="let item of subCategoryList$|async">
+      <td>{{item.id}}</td>
+      <td>{{item.subCategoryName}}</td>
+      <td>{{item.categoryId}}</td>
+      <td>{{categoriesMap.get(item.categoryId)}}</td>
+      <td>
+        <button class="btn btn-outline-primary mx-1" (click)="onModalEdit(content,item)" >
+          <i-bs name="pencil-square"></i-bs>
+        </button>
+        <button class="btn btn-outline-danger mx-1" (click)="onModalDelete(item)">
+          <i-bs name="trash"></i-bs>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Create Sub Category</h5>
+    <button id="add-edit-modal-close" type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click'); onAdded()"></button>
+  </div>
+  <div class="modal-body">
+    <app-add-edit-sub-category [subCategory]="subCategory"></app-add-edit-sub-category>
+  </div>
+</ng-template>

@@ -1,22 +1,75 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './header/header.component';
+import { ItemsComponent } from './items/items.component';
+import { ItemListComponent } from './items/item-list/item-list.component';
+import { ItemDetailComponent } from './items/item-detail/item-detail.component';
+import { ItemComponent } from './items/item-list/item/item.component';
+import { HomeComponent } from './home/home.component';
+import { CategoryComponent } from './category/category.component';
+import { AddEditCategoryComponent } from './category/add-edit-category/add-edit-category.component';
+import { ShowCategoryComponent } from './category/show-category/show-category.component';
+import { SubCategoryComponent } from './sub-category/sub-category.component';
+import { ShowSubCategoryComponent } from './sub-category/show-sub-category/show-sub-category.component';
+import { AddEditSubCategoryComponent } from './sub-category/add-edit-sub-category/add-edit-sub-category.component';
+import { RegisterComponent } from './register/register.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { ListsComponent } from './lists/lists.component';
+import { SharedModule } from './modules/shared.module';
+import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { ProductCardComponent } from './products/product-card/product-card.component';
+import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    ItemsComponent,
+    ItemListComponent,
+    ItemDetailComponent,
+    ItemComponent,
+    HomeComponent,
+    CategoryComponent,
+    AddEditCategoryComponent,
+    ShowCategoryComponent,
+    SubCategoryComponent,
+    ShowSubCategoryComponent,
+    AddEditSubCategoryComponent,
+    RegisterComponent,
+    ProductListComponent,
+    ProductDetailComponent,
+    ListsComponent,
+    TestErrorsComponent,
+    NotFoundComponent,
+    ServerErrorComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    SharedModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi:true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,10 @@
+<form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
+    <div class="mb-3">
+        <label for="categoryName" class="form-label" required>Name</label>
+        <input id="categoryName" type="text" class="form-control" name="name" [ngModel]="categoryName" required
+            #name="ngModel" />
+        <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a valid name!</span>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid" *ngIf="selectedCategory === null">Create</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid" *ngIf="selectedCategory !== null">Update</button>
+</form>
