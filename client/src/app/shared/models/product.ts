@@ -6,5 +6,8 @@ export interface Product {
     description: string;
     price: number;
     imagePath: string;
+    quantity: number;
+    categoryId: number;
+    subCategoryId: number;
     photos: Photo[];
   }

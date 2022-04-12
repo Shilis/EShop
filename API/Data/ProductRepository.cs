@@ -3,6 +3,7 @@ using API.Entities;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -34,6 +35,14 @@ namespace API.Data
                 .SingleOrDefaultAsync();
         }
 
+        public async Task<Item> PostProductAsync(Item item)
+        {
+            _context.Items.Add(item);
+            await _context.SaveChangesAsync();
+
+            return item;
+        }
+
         public async Task<IEnumerable<Item>> GetProductsAsync()
         {
             return await _context.Items
@@ -56,6 +65,11 @@ namespace API.Data
         public void Update(Item product)
         {
             _context.Entry(product).State = EntityState.Modified;
+        }
+
+        public bool ProductExists(int id)
+        {
+            return _context.Items.Any(e => e.Id == id);
         }
     }
 }

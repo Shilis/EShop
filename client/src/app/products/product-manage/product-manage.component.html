@@ -1,0 +1,47 @@
+<button class="btn btn-primary float-end m-2" (click)="onCreate(content)">
+  Create Product
+</button>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Main Image</th>
+      <th scope="col">Title</th>
+      <th scope="col">Category</th>
+      <th scope="col">Sub Category</th>
+      <th scope="col">Price</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{product.id}}</td>
+      <td><img *ngIf="product.imagePath" src="https://localhost:5001/{{product.imagePath}}" alt="" /></td>
+      <td>{{product.title}}</td>
+      <td>{{categoriesMap.get(product.categoryId)}}</td>
+      <td>{{subCategoriesMap.get(product.subCategoryId)}}</td>
+      <td>{{product.price}}&nbsp;Eur</td>
+      <td>
+        <button class="btn btn-outline-primary mx-1" (click)="onModalEdit(content, product)">
+          <i-bs name="pencil-square"></i-bs>
+        </button>
+        <button class="btn btn-outline-danger mx-1" (click)="onModalDelete(product.id)">
+          <i-bs name="trash"></i-bs>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Create Product</h5>
+    <button id="add-edit-product-close" type="button" class="btn-close" aria-label="Close"
+      (click)="modal.dismiss('Cross click'); onAdded()"></button>
+  </div>
+  <div class="modal-body">
+    <app-product-add-edit [selectedProduct]="selectedProduct"></app-product-add-edit>
+  </div>
+</ng-template>

@@ -9,10 +9,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
-import { ItemsComponent } from './items/items.component';
-import { ItemListComponent } from './items/item-list/item-list.component';
-import { ItemDetailComponent } from './items/item-detail/item-detail.component';
-import { ItemComponent } from './items/item-list/item/item.component';
 import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
 import { AddEditCategoryComponent } from './category/add-edit-category/add-edit-category.component';
@@ -31,15 +27,17 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { SearchComponent } from './header/search/search.component';
+import { ProductManageComponent } from './products/product-manage/product-manage.component';
+import { ProductAddEditComponent } from './products/product-manage/product-add-edit/product-add-edit.component';
+import { ShoppingSummaryComponent } from './shopping-cart/shopping-summary/shopping-summary.component';
+import { PhotoEditorComponent } from './products/photo-editor/photo-editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ItemsComponent,
-    ItemListComponent,
-    ItemDetailComponent,
-    ItemComponent,
     HomeComponent,
     CategoryComponent,
     AddEditCategoryComponent,
@@ -55,6 +53,12 @@ import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
     NotFoundComponent,
     ServerErrorComponent,
     ProductCardComponent,
+    ProductFilterComponent,
+    SearchComponent,
+    ProductManageComponent,
+    ProductAddEditComponent,
+    ShoppingSummaryComponent,
+    PhotoEditorComponent,
   ],
   imports: [
     BrowserModule,

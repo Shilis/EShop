@@ -1,0 +1,59 @@
+<form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
+    <div class="row">
+        <div class="col-12">
+            <div class="border-bottom p-3 row">
+                <app-photo-editor [product]="selectedProduct"></app-photo-editor>
+                <div class="mb-3">
+                    <label for="productName" class="form-label" required>Title</label>
+                    <input id="productName" type="text" class="form-control" name="title" [(ngModel)]="product.title" required
+                        #name="ngModel" />
+                    <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a valid title!</span>
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="category">Category</label>
+                    <select id="category" name="categoryId" class="form-select" [(ngModel)]="product.categoryId" (change)="loadSubCategories($event.target.value)">
+                        <option disabled selected>--Select Category--</option>
+                        <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+                    </select>
+                    <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a valid title!</span>
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="subCategory">Sub Category</label>
+                    <select disabled class="form-select" *ngIf="product.categoryId === 0 || subCategories.length < 1">
+                        <option disabled selected>--Select Sub Category--</option>
+                    </select>
+                    <select id="subCategory" name="subCategoryId" class="form-select" [(ngModel)]="product.subCategoryId" *ngIf="product.categoryId !== 0 && subCategories.length > 0">
+                        <option *ngFor="let subCategory of subCategories" [value]="subCategory.id">{{subCategory.subCategoryName}}</option>
+                    </select>
+                    <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a valid title!</span>
+                </div>
+                <div class="mb-3">
+                    <label for="productDescription" class="form-label" required>Description</label>
+                    <textarea id="productDescription" rows="3" name="description" class="form-control" [(ngModel)]="product.description" required
+                        #description="ngModel"></textarea>
+                    <span class="help-block" *ngIf="!description.valid && description.touched">Please enter a valid
+                        description!</span>
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="price" class="form-label" required>Price</label>
+                    <input id="price" type="text" class="form-control" name="price" [(ngModel)]="product.price" required
+                        #price="ngModel" />
+                    <span class="help-block" *ngIf="!price.valid && price.touched">Please enter a valid price!</span>
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="quantity" class="form-label" required>Quantity</label>
+                    <input id="quantity" type="number" class="form-control" name="quantity" [(ngModel)]="product.quantity" required
+                        #quantity="ngModel" />
+                    <span class="help-block" *ngIf="!quantity.valid && quantity.touched">Please enter a valid quantity!</span>
+                </div>
+                <input hidden type="text" name="imagePath" value="" ngModel/>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary" [disabled]="!f.valid"
+                        *ngIf="selectedProduct === null">Create</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!f.valid"
+                        *ngIf="selectedProduct !== null">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

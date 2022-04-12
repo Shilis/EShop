@@ -27,64 +27,83 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/Items
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetItems()
         {
             var products = await _productRepository.GetProductsDtoAsync();
-
+            foreach (var product in products)
+            {
+                product.ImagePath = product.Photos.FirstOrDefault(x => x.IsMain)?.Url;
+            }
             return Ok(products);
         }
 
-        // GET: api/Items/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDto>> GetItem(int id)
         {
             var item = await _productRepository.GetProductDtoAsync(id);
+            item.ImagePath = item.Photos.FirstOrDefault(x => x.IsMain)?.Url;
             return item;
         }
 
-        //// PUT: api/Items/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutItem(int id, Item item)
-        //{
-        //    if (id != item.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateItem(int id, Item item)
+        {
+            if (id != item.Id)
+            {
+                return BadRequest();
+            }
 
-        //    _context.Entry(item).State = EntityState.Modified;
+            _productRepository.Update(item);
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ItemExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                if (await _productRepository.SaveAllAsync()) return NoContent();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_productRepository.ProductExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
-        //// POST: api/Items
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<Item>> PostItem(Item item)
-        //{
-        //    _context.Items.Add(item);
-        //    await _context.SaveChangesAsync();
+        // POST: api/Items
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Item>> PostItem(Item item)
+        {
+            await _productRepository.PostProductAsync(item);
 
-        //    return CreatedAtAction("GetItem", new { id = item.Id }, item);
-        //}
+            return CreatedAtAction("GetItem", new { id = item.Id }, item);
+        }
+
+        [HttpPut("set-main-photo")]
+        public async Task<ActionResult> SetMainPhoto(int productId, int photoId)
+        {
+            var product = await _productRepository.GetProductByIdAsync(productId);
+
+            var photo = product.Photos.FirstOrDefault(x => x.Id == photoId);
+
+            if (photo.IsMain) return BadRequest("This is already your main photo");
+
+            var currentMain = product.Photos.FirstOrDefault(x => x.IsMain);
+
+            if (currentMain != null) currentMain.IsMain = false;
+
+            photo.IsMain = true;
+
+            if(await _productRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to set main photo");
+        }
 
         //// DELETE: api/Items/5
         //[HttpDelete("{id}")]
@@ -100,11 +119,6 @@ namespace API.Controllers
         //    await _context.SaveChangesAsync();
 
         //    return NoContent();
-        //}
-
-        //private bool ItemExists(int id)
-        //{
-        //    return _context.Items.Any(e => e.Id == id);
         //}
     }
 }

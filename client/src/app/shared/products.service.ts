@@ -19,4 +19,13 @@ export class ProductsService {
   getproduct(id: number | string) {
     return this.http.get<Product>(this.productAPIUrl + `items/${id}`);
   }
+
+  addProduct(data: Product) {
+    return this.http.post(this.productAPIUrl + 'items', data);
+  }
+
+  updateProduct(id: number | string, data: Product){
+    return this.http.put(this.productAPIUrl + `items/${id}`, data);
+  }
+
 }

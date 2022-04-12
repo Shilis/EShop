@@ -15,12 +15,7 @@ export class HomeComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute) { }
 
-
   ngOnInit(): void {
-  }
-
-  onLoadProducts() {
-    this.router.navigate(['/products'], { relativeTo: this.activatedRoute });
   }
 
   registerToggle(){

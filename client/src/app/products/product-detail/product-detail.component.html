@@ -1,1 +1,26 @@
-<h1 *ngIf="product">{{product.title}}</h1>
+<div class="wrapper col-12 container" *ngIf="product">
+    <div class="product-img col-lg-6 col-md-5">
+        <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+    </div>
+    <div class="product-info col-lg-6 col-md-7">
+        <div class="product-text">
+            <h1>{{product.title}}</h1>
+            <h2>by best e-shop</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in sapien mi. Sed diam dolor, rhoncus id finibus nec, pretium vitae libero. 
+                Aenean interdum lorem eu fringilla mattis. Sed purus odio, euismod suscipit ligula sed, elementum ultricies lorem. 
+                In venenatis nisi elementum mi venenatis, in lacinia diam rhoncus. 
+                Aenean vulputate, dolor vitae pulvinar tincidunt, leo arcu blandit nulla, in malesuada mi justo ut magna. 
+                Aenean non turpis porttitor, pellentesque turpis at, egestas nisi. 
+                Vivamus fermentum neque risus, eu luctus tellus porttitor nec. 
+                Aliquam nibh neque, dapibus sed sem et, aliquet scelerisque risus. Sed cursus tortor elementum, iaculis risus eget, feugiat mi. 
+                In condimentum justo quis libero volutpat, ut gravida ligula tristique. Ut felis augue, scelerisque vitae vulputate eget, aliquam quis odio. 
+                Morbi vel dui eu diam eleifend euismod. 
+                Nunc scelerisque sodales vehicula. Donec non eros sed nisl aliquet pellentesque et at lacus. Mauris eu euismod quam.</p>
+        </div>
+        <div class="product-price-btn d-flex justify-content-center">
+            <p><span>{{product.price}}</span>$</p>
+            <button type="button">Buy now</button>
+        </div>
+    </div>
+</div>
+

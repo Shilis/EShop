@@ -1,0 +1,3 @@
+<div *ngIf="products">
+    <input placeholder="Search for products" type="text" class="form-control" [ngbTypeahead]="search" [resultTemplate]="rt" [resultFormatter]="resultFormatList" [inputFormatter]="formatter"/>
+</div>
