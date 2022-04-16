@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
 import { AccountService } from '../shared/account.service';
 
 @Component({
@@ -26,4 +27,5 @@ export class HeaderComponent implements OnInit {
     this.accountService.logout();
     this.router.navigate(['/']);
   }
+
 }

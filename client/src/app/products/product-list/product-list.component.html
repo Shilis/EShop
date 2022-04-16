@@ -1,9 +1,67 @@
+<div class="text-center mt-3">
+  <h2>Items - {{pagination?.totalItems}} found</h2>
+</div>
+
+<div class="container mt-3">
+  <form #form="ngForm" class="form-inline align-items-center mb-3" (ngSubmit)="loadProducts()">
+    <div class="row justify-content-center">
+
+      <div class="col-auto">
+        <label>Price from:</label>
+        <input type="number" class="form-control me-1" style="width: 70px;" name="minPrice"
+          [(ngModel)]="productParams.minPrice">
+      </div>
+
+      <div class="col-auto px-2">
+        <label>Price to:</label>
+        <input type="number" class="form-control me-1" style="width: 70px;" name="maxPrice"
+          [(ngModel)]="productParams.maxPrice">
+      </div>
+
+      <div class="col-auto mt-4 px-2">
+        <button class="btn btn-primary me-1" type="submit">Apply Filters</button>
+      </div>
+
+      <div class="col-auto mt-4 px-2">
+        <button (click)="resetFilters()" class="btn btn-info me-1" type="submit">Reset Filters</button>
+      </div>
+
+      <div class="col-auto mt-4 px-2 align-self-end">
+        <div class="btn-group" role="group" ngbRadioGroup name="radioBasic" [(ngModel)]="productParams.orderBy">
+          <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" class="btn-check" value="default">Default
+          </label>
+          <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" class="btn-check" value="priceAscending">Price Ascending
+          </label>
+          <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" class="btn-check" value="priceDescending">Price Descending
+          </label>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+
 <div class="row">
-  <div class="col-2">
-    <app-product-filter></app-product-filter>
+  <div class="col-lg-2 col-md-auto col-xs-auto">
+    <app-product-filter (categoryChanged)="categoryChangedHandler($event)"></app-product-filter>
   </div>
-  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let product of products">
-    <app-product-card [routerLink]="['/products', product.id]" [product]="product" class="card-selector">
-    </app-product-card>
+  <div class="col-lg-10 col-md-10 col-xs-12">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12" *ngFor="let product of products">
+        <app-product-card [routerLink]="['/products', product.id]" [product]="product" class="card-selector">
+        </app-product-card>
+      </div>
+    </div>
   </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="pagination">
+  <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+    firstText="&laquo;" lastText="&raquo;">
+
+  </pagination>
 </div>

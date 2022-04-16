@@ -1,7 +1,8 @@
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Product } from './models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,16 @@ export class FileUploadService {
 
   setMainPhoto(productId: number, photoId: number){
     return this.http.put(this.baseUrl + `items/set-main-photo?productId=${productId}&photoId=${photoId}`, {});
+  }
+
+  getPhotos(productId: number){
+    return this.http.get<Product>(this.baseUrl + `items/${productId}`).pipe(map( data => {
+      return data.photos;
+    }));
+  }
+
+  deletePhoto(productId: number, photoId: number){
+    return this.http.delete(this.baseUrl + `items/delete-photo?productId=${productId}&photoId=${photoId}`);
+    
   }
 }

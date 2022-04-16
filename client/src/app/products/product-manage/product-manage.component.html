@@ -34,12 +34,27 @@
   </tbody>
 </table>
 
+<div class="d-flex justify-content-center" *ngIf="pagination">
+  <pagination 
+    [boundaryLinks]="true" 
+    [totalItems]="pagination.totalItems" 
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;" 
+    nextText="&rsaquo;" 
+    firstText="&laquo;"
+    lastText="&raquo;">
+
+  </pagination>
+</div>
+
 
 <ng-template #content let-modal>
   <div class="modal-header">
     <h5 class="modal-title">Create Product</h5>
     <button id="add-edit-product-close" type="button" class="btn-close" aria-label="Close"
-      (click)="modal.dismiss('Cross click'); onAdded()"></button>
+      (click)="modal.dismiss('Cross click'); loadProducts()"></button>
   </div>
   <div class="modal-body">
     <app-product-add-edit [selectedProduct]="selectedProduct"></app-product-add-edit>

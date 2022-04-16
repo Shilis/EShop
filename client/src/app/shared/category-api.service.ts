@@ -15,6 +15,10 @@ export class CategoryApiService {
     return this.http.get<Category[]>(this.categoryAPIUrl + 'categories')
   }
 
+  getCategoryById(id: number | string){
+    return this.http.get<Category>(this.categoryAPIUrl + `categories/${id}`);
+  }
+
   addCategory(data: Category) {
     return this.http.post(this.categoryAPIUrl + 'categories', data);
   }
@@ -28,11 +32,15 @@ export class CategoryApiService {
   }
 
   getSubCategoryList() {
-    return this.http.get<any>(this.categoryAPIUrl + 'subCategories')
+    return this.http.get<any>(this.categoryAPIUrl + 'subCategories');
   }
 
   getSubCategoryListOfCategory(categoryId: number){
     return this.http.get<any>(this.categoryAPIUrl + `subCategories/${categoryId}/categories`);
+  }
+
+  getSubCategoryById(id: number | string){
+    return this.http.get(this.categoryAPIUrl + `subCategories/${id}`);
   }
 
   addSubCategory(data: any) {

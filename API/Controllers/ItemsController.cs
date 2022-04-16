@@ -11,6 +11,9 @@ using API.Entities;
 using AutoMapper;
 using API.DTOs;
 using API.Interfaces;
+using API.Helpers;
+using API.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -28,9 +31,13 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetItems()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetItems([FromQuery] ProductParams productParams)
         {
-            var products = await _productRepository.GetProductsDtoAsync();
+            var products = await _productRepository.GetProductsDtoAsync(productParams);
+
+            Response.AddPaginationHeader(products.CurrentPage, products.PageSize, 
+                products.TotalCount, products.TotalPages);
+
             foreach (var product in products)
             {
                 product.ImagePath = product.Photos.FirstOrDefault(x => x.IsMain)?.Url;
@@ -75,8 +82,6 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // POST: api/Items
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Item>> PostItem(Item item)
         {
@@ -105,20 +110,38 @@ namespace API.Controllers
             return BadRequest("Failed to set main photo");
         }
 
-        //// DELETE: api/Items/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteItem(int id)
-        //{
-        //    var item = await _context.Items.FindAsync(id);
-        //    if (item == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteItem(int id)
+        {
+            var product = await _productRepository.GetProductByIdAsync(id);
 
-        //    _context.Items.Remove(item);
-        //    await _context.SaveChangesAsync();
+            if (product == null)
+            {
+                return NotFound();
+            }
 
-        //    return NoContent();
-        //}
+            _productRepository.DeleteProduct(product);
+            if (await _productRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to delete product");
+        }
+
+        [HttpDelete("delete-photo")]
+        public async Task<IActionResult> DeletePhoto(int productId, int photoId)
+        {
+            var product = await _productRepository.GetProductByIdAsync(productId);
+
+            var photo = product.Photos.FirstOrDefault(x => x.Id == photoId);
+
+            if(photo == null) return NotFound();
+
+            if (photo.IsMain) return BadRequest("You cannot delete your main photo");
+
+            if(!(await _productRepository.DeletePhotoAsync(photoId))) return NotFound();
+
+            if (await _productRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to delete photo");
+        }
     }
 }

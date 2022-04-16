@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit{
   constructor(private productService: ProductsService, private router: Router) {}
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe(products => this.products = products);
+    this.productService.getProductsDefault().subscribe(products => this.products = products);
   }
 
   formatter = (result: Product) => {

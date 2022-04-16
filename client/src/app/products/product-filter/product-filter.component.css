@@ -1,3 +1,9 @@
 a{
     cursor: pointer;
 }
+
+.filter-border{
+    border: 1px solid rgba(0,0,0,.5);
+    border-radius: 0.5rem;
+    padding: 5px;
+}

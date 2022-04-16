@@ -59,10 +59,6 @@ export class ProductAddEditComponent implements OnInit {
       })
     } else{
       this.productService.updateProduct(this.selectedProduct.id, this.product).subscribe();
-      var closeModalBtn = document.getElementById('add-edit-product-close');
-        if (closeModalBtn){
-          closeModalBtn.click();
-        }
     }
    
   }

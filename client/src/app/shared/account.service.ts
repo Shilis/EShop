@@ -13,7 +13,6 @@ export class AccountService {
 
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
-
   constructor(private http: HttpClient) { }
 
   login(model: any){
@@ -40,7 +39,15 @@ export class AccountService {
   }
 
   setCurrentUser(user: User){
-    this.currentUserSource.next(user);
+    if(user){
+      const role = this.getDecodedToken(user.token).role;
+      const id = this.getDecodedToken(user.token).certserialnumber;
+      user.role = role;
+      user.id = id;
+      localStorage.setItem('user', JSON.stringify(user));
+      this.currentUserSource.next(user);
+    }
+    
   }
 
   logout() {
@@ -51,4 +58,9 @@ export class AccountService {
   getUsers(){
     return this.http.get(this.baseUrl + 'users');
   }
+
+  getDecodedToken(token){
+    return JSON.parse(atob(token.split('.')[1]));
+  }
+
 }

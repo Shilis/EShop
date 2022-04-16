@@ -1,0 +1,30 @@
+<div class="row align-items-center" *ngIf="product">
+    <div class="d-none d-lg-block col-lg-1 text-center py-2">
+        <img src="https://localhost:5001/{{product.imagePath}}" class="rounded" width="100%" />
+    </div>
+    <div class="col-12 col-lg-6">
+        <h5><strong>{{product.title}}</strong></h5>
+    </div>
+    <div class="col-12 col-lg-5 text-center row">
+        <div class="col-4 text-md-right mt-2">
+            <h6><strong>{{product.price}}$&nbsp;<span class="text-muted">x</span> {{cart.quantity}} </strong></h6>
+        </div>
+        <div class="col-6 col-sm-4 col-lg-6">
+            <div class="w-25 btn-group" role="group">
+                <a class="btn btn-primary" (click)="increaseProduct()">
+                    <i-bs name="plus"></i-bs>
+                </a> &nbsp;
+                <a class="btn btn-warning" (click)="decreaseProduct()">
+                    <i-bs name="dash"></i-bs>
+                </a>
+            </div>
+    
+        </div>
+        <div class="col-2 col-sm-4 col-lg-2 text-right">
+            <a class="btn btn-danger" (click)="removeProduct()">
+                <i-bs name="trash"></i-bs>
+            </a>
+        </div>
+    </div>
+<div>
+

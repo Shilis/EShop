@@ -18,7 +18,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upload(int id)
+        public async Task<IActionResult> UploadAsync(int id)
         {
             var file = Request.Form.Files[0];
             var folderName = Path.Combine("Resources", "Images");
@@ -38,8 +38,8 @@ namespace API.Controllers
                 photo.Url = dbPath.Replace(@"\", @"/");
                 photo.IsMain = false;
                 photo.ItemId = id;
-                _context.Photos.Add(photo);
-                _context.SaveChangesAsync();
+                await _context.Photos.AddAsync(photo);
+                await _context.SaveChangesAsync();
 
                 return Ok(new { dbPath });
             }

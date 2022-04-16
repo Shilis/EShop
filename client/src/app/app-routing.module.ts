@@ -9,7 +9,8 @@ import { ListsComponent } from './lists/lists.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductManageComponent } from './products/product-manage/product-manage.component';
-import { AuthGuard } from './shared/guards/auth.guard';
+import { AdminGuard } from './shared/guards/admin.guard';
+import { ShoppingSummaryComponent } from './shopping-cart/shopping-summary/shopping-summary.component';
 import { SubCategoryComponent } from './sub-category/sub-category.component';
 
 const routes: Routes = [
@@ -17,9 +18,10 @@ const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailComponent },
   { path: 'lists', component: ListsComponent },
-  { path: 'product/manage', component: ProductManageComponent, pathMatch: 'full'},
-  { path: 'categories', component: CategoryComponent, canActivate: [AuthGuard] },
-  { path: 'subCategories', component: SubCategoryComponent, canActivate: [AuthGuard] },
+  { path: 'product/manage', component: ProductManageComponent, pathMatch: 'full', canActivate: [AdminGuard]},
+  { path: 'categories', component: CategoryComponent, canActivate: [AdminGuard] },
+  { path: 'subCategories', component: SubCategoryComponent, canActivate: [AdminGuard] },
+  { path: 'carts', component: ShoppingSummaryComponent },
   { path: 'errors', component: TestErrorsComponent},
   { path: 'not-found', component: NotFoundComponent},
   { path: 'server-error', component: ServerErrorComponent},

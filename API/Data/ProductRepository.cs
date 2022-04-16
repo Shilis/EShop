@@ -1,5 +1,6 @@
 ﻿using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -57,6 +58,11 @@ namespace API.Data
                 .ToListAsync();
         }
 
+        public void DeleteProduct(Item item)
+        {
+            _context.Items.Remove(item);
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
@@ -70,6 +76,41 @@ namespace API.Data
         public bool ProductExists(int id)
         {
             return _context.Items.Any(e => e.Id == id);
+        }
+
+        public async Task<bool> DeletePhotoAsync(int photoId)
+        {
+            var photo = await _context.Photos.FirstOrDefaultAsync(x => x.Id == photoId);
+
+            if (photo == null) return false;
+
+            _context.Remove(photo);
+
+            return true;
+        }
+
+        public async Task<PagedList<ProductDto>> GetProductsDtoAsync(ProductParams productParams)
+        {
+            var query = _context.Items.AsQueryable();
+
+            query = query.Where(p => p.Price >= productParams.MinPrice && p.Price <= productParams.MaxPrice);
+
+            if(productParams.OrderBy != "default")
+            {
+                query = productParams.OrderBy switch
+                {
+                    "priceDescending" => query.OrderByDescending(p => p.Price),
+                    "priceAscending" => query.OrderBy(p => p.Price),
+                    _ => query.OrderBy(p => p.Price)
+                };
+            }
+            
+
+            if(productParams.CategoryId != 0) query = query.Where(p => p.CategoryId == productParams.CategoryId);
+
+            return await PagedList<ProductDto>.CreateAsync(query.ProjectTo<ProductDto>(
+                _imapper.ConfigurationProvider).AsNoTracking(), 
+                productParams.PageNumber, productParams.PageSize);
         }
     }
 }

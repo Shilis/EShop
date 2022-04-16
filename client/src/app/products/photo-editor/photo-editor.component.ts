@@ -18,9 +18,12 @@ export class PhotoEditorComponent implements OnInit {
   message: string[] = [];
   fileInfos?: Observable<any>;
 
+  photos: Photo[];
+
   constructor(private uploadService: FileUploadService) { }
 
   ngOnInit(): void {
+    this.photos = this.product.photos;
   }
 
   selectFiles(event): void {
@@ -35,7 +38,6 @@ export class PhotoEditorComponent implements OnInit {
       for (let i = 0; i < this.selectedFiles.length; i++) {
         this.upload(i, this.selectedFiles[i]);
       }
-
     }
   }
 
@@ -72,5 +74,10 @@ export class PhotoEditorComponent implements OnInit {
     })
   }
   
-
+  deletePhoto(photo: Photo){
+    this.uploadService.deletePhoto(this.product.id, photo.id).subscribe();
+    const photoObject = this.photos.find(x => x.id === photo.id);
+    const photoIndex = this.photos.indexOf(photoObject);
+    this.photos.splice(photoIndex, 1);
+  }
 }

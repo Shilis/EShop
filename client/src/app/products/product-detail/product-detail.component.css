@@ -42,7 +42,7 @@ body {
 }
 
 .product-text p {
-  margin: 0 0 0 38px;
+  margin: 10px 0 0 38px;
   color: #8d8d8d;
   line-height: 1.7em;
   font-size: 15px;
@@ -71,6 +71,23 @@ span {
   font-size: 34px;
 }
 
+.category, .sub-category{
+  display: inline;
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
+  border-radius: 10px;
+  color: #fdf1ec;
+}
+
+.category{
+  background-color: #50755a;
+  margin: 0 5px 47px 38px;
+}
+
+.sub-category{
+  background-color: #656665;
+}
+
 .product-price-btn button {
   display: inline-block;
   height: 50px;
@@ -88,6 +105,16 @@ span {
   background-color: #79b0a1;
   cursor: pointer;
   outline: none;
+}
+
+.price {
+  margin: 0px 0 0 38px;
+  top: -13px;
+  height: 50px;
+  font-family: 'Trocchi', serif;
+  font-size: 28px;
+  font-weight: lighter;
+  color: #474747;
 }
 
 .product-price-btn button:hover {

@@ -6,21 +6,44 @@
         <div class="product-text">
             <h1>{{product.title}}</h1>
             <h2>by best e-shop</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in sapien mi. Sed diam dolor, rhoncus id finibus nec, pretium vitae libero. 
-                Aenean interdum lorem eu fringilla mattis. Sed purus odio, euismod suscipit ligula sed, elementum ultricies lorem. 
-                In venenatis nisi elementum mi venenatis, in lacinia diam rhoncus. 
-                Aenean vulputate, dolor vitae pulvinar tincidunt, leo arcu blandit nulla, in malesuada mi justo ut magna. 
-                Aenean non turpis porttitor, pellentesque turpis at, egestas nisi. 
-                Vivamus fermentum neque risus, eu luctus tellus porttitor nec. 
-                Aliquam nibh neque, dapibus sed sem et, aliquet scelerisque risus. Sed cursus tortor elementum, iaculis risus eget, feugiat mi. 
-                In condimentum justo quis libero volutpat, ut gravida ligula tristique. Ut felis augue, scelerisque vitae vulputate eget, aliquam quis odio. 
-                Morbi vel dui eu diam eleifend euismod. 
-                Nunc scelerisque sodales vehicula. Donec non eros sed nisl aliquet pellentesque et at lacus. Mauris eu euismod quam.</p>
+            <span class="category p-2" *ngIf="category">{{category.name}}</span>
+            <span class="sub-category p-2" *ngIf="subCategory">{{subCategory.subCategoryName}}</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in sapien mi. Sed diam dolor, rhoncus id
+                finibus nec, pretium vitae libero.
+                Aenean interdum lorem eu fringilla mattis. Sed purus odio, euismod suscipit ligula sed, elementum
+                ultricies lorem.
+                In venenatis nisi elementum mi venenatis, in lacinia diam rhoncus.
+                Aenean vulputate, dolor vitae pulvinar tincidunt, leo arcu blandit nulla, in malesuada mi justo ut
+                magna.
+                Aenean non turpis porttitor, pellentesque turpis at, egestas nisi.
+                Vivamus fermentum neque risus, eu luctus tellus porttitor nec.
+                Aliquam nibh neque, dapibus sed sem et, aliquet scelerisque risus. Sed cursus tortor elementum, iaculis
+                risus eget, feugiat mi.
+                In condimentum justo quis libero volutpat, ut gravida ligula tristique. Ut felis augue, scelerisque
+                vitae vulputate eget, aliquam quis odio.
+                Morbi vel dui eu diam eleifend euismod.
+                Nunc scelerisque sodales vehicula. Donec non eros sed nisl aliquet pellentesque et at lacus. Mauris eu
+                euismod quam.</p>
         </div>
+        <p class="price text-start me-2">Price: <span>{{product.price}}</span>$</p>
+
         <div class="product-price-btn d-flex justify-content-center">
-            <p><span>{{product.price}}</span>$</p>
-            <button type="button">Buy now</button>
+            <form #form="ngForm" (ngSubmit)="addToCart(form.value)">
+                <div class="row">
+                    <div class="col-6 ">
+                        <div class="row">
+                            <label class="col-form-label col-6" for="quantity">Quantity</label>
+                            <div class="col-6">
+                                <input id="quantity" type="number" class="form-control" name="quantity"
+                                    [(ngModel)]="cart.quantity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit">Add to cart</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-

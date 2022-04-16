@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Category } from 'src/app/category/category.model';
 import { CategoryApiService } from 'src/app/shared/category-api.service';
 
@@ -11,6 +11,8 @@ export class ProductFilterComponent implements OnInit {
   categories: Category[];
   subCategories: any[];
 
+  @Output() categoryChanged: EventEmitter<number> = new EventEmitter()
+
   constructor(private categoryService: CategoryApiService) { }
 
   ngOnInit(): void {
@@ -22,8 +24,7 @@ export class ProductFilterComponent implements OnInit {
       categories => this.categories = categories);
   }
 
-  loadSubCategories(categoryId: number){
-    this.categoryService.getSubCategoryListOfCategory(categoryId).subscribe(subCategories => this.subCategories = subCategories);
-    console.log(categoryId);
+  applyCategoriesFilter(categoryId: number){
+    this.categoryChanged.emit(categoryId);
   }
 }

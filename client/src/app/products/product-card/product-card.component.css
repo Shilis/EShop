@@ -15,3 +15,8 @@
     overflow: hidden;
 }
 
+.card-img-top{
+    height: 200px;
+    max-width: 100%;
+}
+

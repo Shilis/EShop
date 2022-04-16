@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12">
             <div class="border-bottom p-3 row">
-                <app-photo-editor [product]="selectedProduct"></app-photo-editor>
+                <app-photo-editor *ngIf="product.photos" [product]="selectedProduct"></app-photo-editor>
                 <div class="mb-3">
                     <label for="productName" class="form-label" required>Title</label>
                     <input id="productName" type="text" class="form-control" name="title" [(ngModel)]="product.title" required

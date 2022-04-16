@@ -5,7 +5,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 @NgModule({
@@ -16,14 +16,16 @@ import { BrowserModule } from '@angular/platform-browser';
     BsDropdownModule.forRoot(),
     NgxGalleryModule,
     BrowserModule,
-    NgbModule
+    NgbModule,
+    PaginationModule.forRoot()
   ],
   exports: [
     NgxBootstrapIconsModule,
     BsDropdownModule,
     NgxGalleryModule,
     BrowserModule,
-    NgbModule
+    NgbModule,
+    PaginationModule
   ]
 })
 export class SharedModule { }

@@ -33,6 +33,9 @@ import { ProductManageComponent } from './products/product-manage/product-manage
 import { ProductAddEditComponent } from './products/product-manage/product-add-edit/product-add-edit.component';
 import { ShoppingSummaryComponent } from './shopping-cart/shopping-summary/shopping-summary.component';
 import { PhotoEditorComponent } from './products/photo-editor/photo-editor.component';
+import { SubCategoryFilterComponent } from './products/product-filter/sub-category-filter/sub-category-filter.component';
+import { HasRoleDirective } from './shared/directives/has-role.directive';
+import { ShoppingItemComponent } from './shopping-cart/shopping-item/shopping-item.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +62,9 @@ import { PhotoEditorComponent } from './products/photo-editor/photo-editor.compo
     ProductAddEditComponent,
     ShoppingSummaryComponent,
     PhotoEditorComponent,
+    SubCategoryFilterComponent,
+    HasRoleDirective,
+    ShoppingItemComponent,
   ],
   imports: [
     BrowserModule,
