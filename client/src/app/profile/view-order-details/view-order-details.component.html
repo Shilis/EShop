@@ -1,0 +1,9 @@
+<div *ngIf="product">
+    <td>
+        <img src="https://localhost:5001/{{product.imagePath}}" class="rounded" style="width: 100px; height: 75px;">
+        {{ product.title }}&nbsp;|&nbsp;
+    </td>
+    <td>Price: {{ product.price }}&nbsp;|&nbsp;</td>
+    <td>Quantity: {{ orderDetail.quantity }}</td>
+</div>
+

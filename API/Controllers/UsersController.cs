@@ -30,12 +30,12 @@ namespace API.Controllers
             return Ok(usersToReturn);
         }
 
-        [HttpGet("{username}")]
-        public async Task<ActionResult<MemberDto>> GetUser(string username)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<RegisterDto>> GetUser(int id)
         {
-            var user = await _userRepository.GetUserByUserameAsync(username);
+            var user = await _userRepository.GetUserByIdAsync(id);
 
-            return _mapper.Map<MemberDto>(user);
+            return _mapper.Map<RegisterDto>(user);
         }
     }
 }

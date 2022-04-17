@@ -52,6 +52,12 @@ export class PhotoEditorComponent implements OnInit {
             const msg = 'Uploaded the file successfully: ' + file.name;
             this.message.push(msg);
             this.fileInfos = this.uploadService.getFiles();
+            let photo: Photo = {
+              id: 0,
+              url: `Resources/Images/${file.name}`,
+              isMain: false
+            }
+            this.photos.push(photo);
           }
         },
         error: (err: any) => {

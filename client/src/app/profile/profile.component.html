@@ -1,0 +1,112 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li [ngbNavItem]="1">
+    <a ngbNavLink>Edit Profile</a>
+    <ng-template ngbNavContent>
+
+      <form #editForm="ngForm" (ngSubmit)="updateProfile()" *ngIf="model">
+        <hr>
+        <div class="row">
+          <div class="form-group mb-2" hidden>
+            <input type="text" class="form-control" name="username" [(ngModel)]="model.username" placeholder="Username">
+          </div>
+
+          <div class="form-group mb-2" hidden>
+            <input type="password" class="form-control" name="password" [(ngModel)]="model.password"
+              placeholder="Password">
+          </div>
+
+          <div class="form-group mb-2 col-sm">
+            <label for="name" class="form-label">Name</label>
+            <input id="name" type="text" class="form-control" name="name" [(ngModel)]="model.name" placeholder="Name">
+          </div>
+
+          <div class="form-group mb-2 col-sm">
+            <label for="streetAddress" class="form-label">Street Address</label>
+            <input id="streetAddress" type="text" class="form-control" name="streetAddress" [(ngModel)]="model.streetAddress"
+              placeholder="Street Address">
+          </div>
+
+          <div class="form-group mb-2 col-sm">
+            <label for="city" class="form-label">City</label>
+            <input id="city" type="text" class="form-control" name="city" [(ngModel)]="model.city" placeholder="City">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group mb-2 col-sm">
+            <label for="state" class="form-label">State</label>
+            <input id="state" type="text" class="form-control" name="state" [(ngModel)]="model.state" placeholder="State">
+          </div>
+
+          <div class="form-group mb-2 col-sm" >
+            <label for="postalCode" class="form-label">Postal Code</label>
+            <input id="postalCode" type="text" class="form-control" name="postalCode" [(ngModel)]="model.postalCode"
+              placeholder="Postal Code">
+          </div>
+
+          <div class="form-group mb-2 col-sm">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" type="email" class="form-control" name="email" [(ngModel)]="model.email" placeholder="Email">
+          </div>
+
+          <div class="form-group mb-2 col-sm">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <input id="phoneNumber" type="tel" class="form-control" name="phoneNumber" [(ngModel)]="model.phoneNumber"
+              placeholder="Phone Number">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <button class="btn btn-primary me-2" type="submit">Update</button>
+        </div>
+      </form>
+
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="2">
+    <a ngbNavLink>Orders</a>
+    <ng-template ngbNavContent>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width: 20%" scope="col">Order Number</th>
+            <th style="width: 40%" scope="col">Order Status</th>
+            <th style="width: 20%" scope="col">Order Price</th>
+            <th style="width: 20%" scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{order.id}}</td>
+            <td>{{order.status}}</td>
+            <td>None</td>
+            <td>
+              <button class="btn btn-outline-primary mx-1" (click)="viewOrder(content, order)">
+                <i-bs name="info-square"></i-bs>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </li>
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Order Details Nr. {{selectedOrder.id}}</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <table class="table">
+      <tbody>
+        <tr *ngFor="let orderDetail of orderDetails">
+          <app-view-order-details [orderDetail]="orderDetail"></app-view-order-details>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>

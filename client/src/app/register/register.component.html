@@ -8,6 +8,35 @@
     <div class="form-group mb-2">
         <input type="password" class="form-control" name="password" [(ngModel)]="model.password" placeholder="Password">
     </div>
+
+    <div class="form-group mb-2">
+        <input type="text" class="form-control" name="name" [(ngModel)]="model.name" placeholder="Name">
+    </div>
+
+    <div class="form-group mb-2">
+        <input type="text" class="form-control" name="streetAddress" [(ngModel)]="model.streetAddress" placeholder="Street Address">
+    </div>
+
+    <div class="form-group mb-2">
+        <input type="text" class="form-control" name="city" [(ngModel)]="model.city" placeholder="City">
+    </div>
+
+    <div class="form-group mb-2">
+        <input type="text" class="form-control" name="state" [(ngModel)]="model.state" placeholder="State">
+    </div>
+
+    <div class="form-group mb-2">
+        <input type="text" class="form-control" name="postalCode" [(ngModel)]="model.postalCode" placeholder="Postal Code">
+    </div>
+
+    <div class="form-group mb-2">
+        <input type="email" class="form-control" name="email" [(ngModel)]="model.email" placeholder="Email">
+    </div>
+    
+    <div class="form-group mb-2">
+        <input type="tel" class="form-control" name="phoneNumber" [(ngModel)]="model.phoneNumber" placeholder="Phone Number">
+    </div>
+
     <div class="form-group text-center">
         <button class="btn btn-primary me-2" type="submit">Register</button>
         <button class="btn btn-secondary me-2" (click)="cancel()" type="button">Cancel</button>

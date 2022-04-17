@@ -9,6 +9,7 @@ import { ListsComponent } from './lists/lists.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductManageComponent } from './products/product-manage/product-manage.component';
+import { ProfileComponent } from './profile/profile.component';
 import { AdminGuard } from './shared/guards/admin.guard';
 import { ShoppingSummaryComponent } from './shopping-cart/shopping-summary/shopping-summary.component';
 import { SubCategoryComponent } from './sub-category/sub-category.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'categories', component: CategoryComponent, canActivate: [AdminGuard] },
   { path: 'subCategories', component: SubCategoryComponent, canActivate: [AdminGuard] },
   { path: 'carts', component: ShoppingSummaryComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'errors', component: TestErrorsComponent},
   { path: 'not-found', component: NotFoundComponent},
   { path: 'server-error', component: ServerErrorComponent},

@@ -31,7 +31,13 @@ namespace API.Controllers
 
             var user = new AppUser
             {
-                UserName = registerDto.Username.ToLower()
+                UserName = registerDto.Username.ToLower(),
+                Name = registerDto.Name,
+                StreetAddress = registerDto.StreetAddress,
+                City = registerDto.City,
+                PostalCode = registerDto.PostalCode,
+                Email = registerDto.Email,
+                PhoneNumber = registerDto.PhoneNumber
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);

@@ -36,6 +36,8 @@ import { PhotoEditorComponent } from './products/photo-editor/photo-editor.compo
 import { SubCategoryFilterComponent } from './products/product-filter/sub-category-filter/sub-category-filter.component';
 import { HasRoleDirective } from './shared/directives/has-role.directive';
 import { ShoppingItemComponent } from './shopping-cart/shopping-item/shopping-item.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ViewOrderDetailsComponent } from './profile/view-order-details/view-order-details.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { ShoppingItemComponent } from './shopping-cart/shopping-item/shopping-it
     SubCategoryFilterComponent,
     HasRoleDirective,
     ShoppingItemComponent,
+    ProfileComponent,
+    ViewOrderDetailsComponent,
   ],
   imports: [
     BrowserModule,

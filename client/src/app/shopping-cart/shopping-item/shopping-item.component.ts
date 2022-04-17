@@ -51,6 +51,8 @@ export class ShoppingItemComponent implements OnInit {
   }
 
   removeProduct() {
-    this.cartService.removeCart(this.cart.id).subscribe(() => this.loadProduct());
+    this.cartService.removeCart(this.cart.id).subscribe();
+    this.price.emit(-this.product.price*this.cart.quantity);
+    this.product = null;
   }
 }

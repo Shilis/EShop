@@ -19,6 +19,8 @@ namespace API.Data
         public DbSet<Item> Items { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetails> OrderDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
