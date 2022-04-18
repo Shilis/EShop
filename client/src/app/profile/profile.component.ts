@@ -32,7 +32,11 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
       this.user = user;
-      this.orderService.getUserOrders(user.id).subscribe(orders => this.orders = orders);
+      if(user.role === 'Admin'){
+        this.orderService.getOrders().subscribe(orders => this.orders = orders);
+      }else{
+        this.orderService.getUserOrders(user.id).subscribe(orders => this.orders = orders);
+      }
       this.memberService.getMember(user.id).subscribe(user => this.model = user);
     });
   }
@@ -40,10 +44,20 @@ export class ProfileComponent implements OnInit {
   viewOrder(content, order: Order){
     this.orderService.getOrderDetails(order.id).subscribe(orderDetails => this.orderDetails = orderDetails);
     this.selectedOrder = order;
-    this.modalService.open(content);
+    this.modalService.open(content, { size: 'lg' });
   }
 
   updateProfile(){
     console.log(this.model);
+  }
+
+  shipOrder(order: Order){
+    order.status = "shipped";
+    this.orderService.updateOrder(order.id, order).subscribe();
+  }
+
+  cancelOrder(order: Order){
+    order.status = "cancelled";
+    this.orderService.updateOrder(order.id, order).subscribe();
   }
 }

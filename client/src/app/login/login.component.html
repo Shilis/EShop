@@ -1,0 +1,19 @@
+<form #loginForm="ngForm" (ngSubmit)="login()">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="form-floating mb-2">
+      <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" [(ngModel)]="model.username" required #username="ngModel">
+      <label for="floatingInput">Username</label>
+      <span class="text-danger" *ngIf="!username.valid && username.touched">Please enter username!</span>
+    </div>
+    <div class="form-floating mb-2">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" [(ngModel)]="model.password" required #password="ngModel">
+      <label for="floatingPassword">Password</label>
+      <span class="text-danger" *ngIf="!password.valid && password.touched">Please enter password!</span>
+    </div>
+
+    <div class="form-group text-center">
+        <button class="btn btn-primary me-2" type="submit">Sign in</button>
+        <button class="btn btn-secondary me-2" (click)="cancel()" type="button">Go Back</button>
+    </div>
+</form>

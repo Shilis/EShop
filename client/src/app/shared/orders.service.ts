@@ -25,7 +25,15 @@ export class OrdersService {
     return this.http.get<Order[]>(this.baseUrl + `orders/users?userId=${userId}`);
   }
 
+  getOrders(){
+    return this.http.get<Order[]>(this.baseUrl + `orders`);
+  }
+
   getOrderDetails(orderId: number){
     return this.http.get<OrderDetails[]>(this.baseUrl + `orderDetails?orderID=${orderId}`);
+  }
+
+  updateOrder(id: number | string, data: Order){
+    return this.http.put(this.baseUrl + `orders/${id}`, data);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { take } from 'rxjs';
 import { Category } from 'src/app/category/category.model';
@@ -39,7 +39,8 @@ export class ProductDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private categoryService: CategoryApiService,
     private cartService: CartService,
-    private accountService: AccountService) { }
+    private accountService: AccountService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loadProduct();
@@ -102,6 +103,10 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart(data: Cart) {
+    if(!this.user) {
+      this.router.navigate(['/']);
+      return;
+    }
     if (data.quantity > 0) {
       let isNewItem = true;
       let existingCart: Cart = {

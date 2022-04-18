@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { map, Subscription, take } from 'rxjs';
 import { AccountService } from '../shared/account.service';
 
 @Component({
@@ -10,22 +10,35 @@ import { AccountService } from '../shared/account.service';
 })
 export class HeaderComponent implements OnInit {
   model: any = {}
+  user: any;
+  subscription: Subscription;
+
+  public isMenuCollapsed = true;
 
   constructor(public accountService: AccountService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    });
+
+    this.subscription = this.accountService.getClickEvent().subscribe(() => this.refresh());
   }
 
-  login() {
-    this.accountService.login(this.model).subscribe( { 
-      next: (v) => this.router.navigate(['/products']),
-      error: (e) => console.log(e)});
-  }
+  // login() {
+  //   this.accountService.login(this.model).subscribe( () => this.ngOnInit());
+  // }
 
   logout() {
     this.accountService.logout();
     this.router.navigate(['/']);
+    this.ngOnInit();
+  }
+
+  refresh(){
+    this.ngOnInit();
+    this.subscription.unsubscribe();
   }
 
 }

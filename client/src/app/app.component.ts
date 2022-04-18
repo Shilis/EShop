@@ -11,7 +11,6 @@ import { User } from './shared/models/user';
 })
 export class AppComponent implements OnInit {
   title = 'E-Shop';
-  users: any;
 
   constructor(private accountService: AccountService) { }
 

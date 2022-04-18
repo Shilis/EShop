@@ -1,5 +1,5 @@
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-  <li [ngbNavItem]="1">
+  <li [ngbNavItem]="2" *ngIf="user.role !== 'Admin'">
     <a ngbNavLink>Edit Profile</a>
     <ng-template ngbNavContent>
 
@@ -64,7 +64,7 @@
 
     </ng-template>
   </li>
-  <li [ngbNavItem]="2">
+  <li [ngbNavItem]="1">
     <a ngbNavLink>Orders</a>
     <ng-template ngbNavContent>
       <table class="table table-striped">
@@ -84,6 +84,12 @@
             <td>
               <button class="btn btn-outline-primary mx-1" (click)="viewOrder(content, order)">
                 <i-bs name="info-square"></i-bs>
+              </button>
+              <button *ngIf="user.role === 'Admin'" class="btn btn-outline-primary mx-1" (click)="shipOrder(order)" style="background-color: green;">
+                <i-bs name="truck" style="color: whitesmoke;"></i-bs>
+              </button>
+              <button *ngIf="user.role === 'Admin'" class="btn btn-outline-primary mx-1" (click)="cancelOrder(order)" style="background-color: red;">
+                <i-bs name="x-circle" style="color: whitesmoke;"></i-bs>
               </button>
             </td>
           </tr>
@@ -106,6 +112,7 @@
         <tr *ngFor="let orderDetail of orderDetails">
           <app-view-order-details [orderDetail]="orderDetail"></app-view-order-details>
         </tr>
+        <app-view-order-user *ngIf="user.role === 'Admin'" [selectedOrder]="selectedOrder" ></app-view-order-user>
       </tbody>
     </table>
   </div>

@@ -35,6 +35,7 @@ namespace API.Controllers
                 Name = registerDto.Name,
                 StreetAddress = registerDto.StreetAddress,
                 City = registerDto.City,
+                State = registerDto.State,
                 PostalCode = registerDto.PostalCode,
                 Email = registerDto.Email,
                 PhoneNumber = registerDto.PhoneNumber

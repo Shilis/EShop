@@ -10,8 +10,9 @@ import { AccountService } from '../shared/account.service';
 })
 export class HomeComponent implements OnInit {
   registerMode = false;
+  loginMode = false;
 
-  constructor(private accountService: AccountService, 
+  constructor(public accountService: AccountService, 
               private router: Router,
               private activatedRoute: ActivatedRoute) { }
 
@@ -22,7 +23,15 @@ export class HomeComponent implements OnInit {
     this.registerMode = !this.registerMode;
   }
 
+  loginToggle(){
+    this.loginMode = !this.loginMode;
+  }
+
   cancelRegisterMode(event: boolean){
     this.registerMode = event;
+  }
+
+  cancelLoginMode(event: boolean){
+    this.loginMode = event;
   }
 }

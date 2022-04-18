@@ -19,7 +19,6 @@ import { AddEditSubCategoryComponent } from './sub-category/add-edit-sub-categor
 import { RegisterComponent } from './register/register.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
-import { ListsComponent } from './lists/lists.component';
 import { SharedModule } from './modules/shared.module';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
@@ -38,6 +37,8 @@ import { HasRoleDirective } from './shared/directives/has-role.directive';
 import { ShoppingItemComponent } from './shopping-cart/shopping-item/shopping-item.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ViewOrderDetailsComponent } from './profile/view-order-details/view-order-details.component';
+import { ViewOrderUserComponent } from './profile/view-order-user/view-order-user.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,6 @@ import { ViewOrderDetailsComponent } from './profile/view-order-details/view-ord
     RegisterComponent,
     ProductListComponent,
     ProductDetailComponent,
-    ListsComponent,
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
@@ -69,6 +69,8 @@ import { ViewOrderDetailsComponent } from './profile/view-order-details/view-ord
     ShoppingItemComponent,
     ProfileComponent,
     ViewOrderDetailsComponent,
+    ViewOrderUserComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

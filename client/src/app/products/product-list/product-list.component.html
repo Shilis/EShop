@@ -18,14 +18,6 @@
           [(ngModel)]="productParams.maxPrice">
       </div>
 
-      <div class="col-auto mt-4 px-2">
-        <button class="btn btn-primary me-1" type="submit">Apply Filters</button>
-      </div>
-
-      <div class="col-auto mt-4 px-2">
-        <button (click)="resetFilters()" class="btn btn-info me-1" type="submit">Reset Filters</button>
-      </div>
-
       <div class="col-auto mt-4 px-2 align-self-end">
         <div class="btn-group" role="group" ngbRadioGroup name="radioBasic" [(ngModel)]="productParams.orderBy">
           <label ngbButtonLabel class="btn-primary">
@@ -38,6 +30,14 @@
             <input ngbButton type="radio" class="btn-check" value="priceDescending">Price Descending
           </label>
         </div>
+      </div>
+
+      <div class="col-auto mt-4 px-2">
+        <button class="btn btn-primary me-1" type="submit">Apply Filters</button>
+      </div>
+
+      <div class="col-auto mt-4 px-2">
+        <button (click)="resetFilters()" class="btn btn-info me-1" type="submit">Reset Filters</button>
       </div>
 
     </div>
